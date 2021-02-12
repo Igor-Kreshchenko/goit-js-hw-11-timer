@@ -14,13 +14,17 @@ class CountdownTimer {
   }
 
   start() {
-    setInterval(() => {
-      const currentTime = Date.now();
-      const deltaTime = this.targetDate - currentTime;
-      const { days, hours, mins, secs } = this.getTimeComponents(deltaTime);
+    //   Без следующей строки при запуске таймера 1 секунду отображаются значения из разметки
+    this.updateValues();
+    setInterval(this.updateValues.bind(this), 1000);
+  }
 
-      this.onTick({ days, hours, mins, secs });
-    }, 1000);
+  updateValues() {
+    const currentTime = Date.now();
+    const deltaTime = this.targetDate - currentTime;
+    const { days, hours, mins, secs } = this.getTimeComponents(deltaTime);
+
+    this.onTick({ days, hours, mins, secs });
   }
 
   getTimeComponents(time) {
@@ -40,10 +44,10 @@ class CountdownTimer {
 }
 
 function updateTimerFace({ days, hours, mins, secs }) {
-  countdownTimer.refs.daysRef.textContent = days;
-  countdownTimer.refs.hoursRef.textContent = hours;
-  countdownTimer.refs.minsRef.textContent = mins;
-  countdownTimer.refs.secsRef.textContent = secs;
+  this.refs.daysRef.textContent = days;
+  this.refs.hoursRef.textContent = hours;
+  this.refs.minsRef.textContent = mins;
+  this.refs.secsRef.textContent = secs;
 }
 
 // Вызов экземпляра класса Timer
