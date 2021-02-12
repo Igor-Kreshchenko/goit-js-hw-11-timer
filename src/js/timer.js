@@ -39,17 +39,17 @@ class CountdownTimer {
   }
 }
 
-// Вызов экземпляра класса Timer
-
-const countdownTimer = new CountdownTimer({
-  selector: '#timer-1',
-  targetDate: new Date('Dec 31, 2021'),
-  onTick: updateTimerFace,
-});
-
 function updateTimerFace({ days, hours, mins, secs }) {
   countdownTimer.refs.daysRef.textContent = days;
   countdownTimer.refs.hoursRef.textContent = hours;
   countdownTimer.refs.minsRef.textContent = mins;
   countdownTimer.refs.secsRef.textContent = secs;
 }
+
+// Вызов экземпляра класса Timer
+
+const countdownTimer = new CountdownTimer({
+  selector: '#timer-1',
+  targetDate: new Date('Jan 1, 2022'),
+  onTick: updateTimerFace,
+});
