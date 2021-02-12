@@ -9,6 +9,8 @@ class CountdownTimer {
       minsRef: document.querySelector(`${this.selector} [data-value="mins"]`),
       secsRef: document.querySelector(`${this.selector} [data-value="secs"]`),
     };
+
+    this.start();
   }
 
   start() {
@@ -19,10 +21,6 @@ class CountdownTimer {
 
       this.onTick({ days, hours, mins, secs });
     }, 1000);
-  }
-
-  initial() {
-    this.start();
   }
 
   getTimeComponents(time) {
@@ -41,17 +39,17 @@ class CountdownTimer {
   }
 }
 
+// Вызов экземпляра класса Timer
+
 const countdownTimer = new CountdownTimer({
   selector: '#timer-1',
   targetDate: new Date('Dec 31, 2021'),
-  onTick: updateClockFace,
+  onTick: updateTimerFace,
 });
 
-function updateClockFace({ days, hours, mins, secs }) {
-  countdownTimer.refs.daysRef.textContent = `${days}`;
-  countdownTimer.refs.hoursRef.textContent = `${hours}`;
-  countdownTimer.refs.minsRef.textContent = `${mins}`;
-  countdownTimer.refs.secsRef.textContent = `${secs}`;
+function updateTimerFace({ days, hours, mins, secs }) {
+  countdownTimer.refs.daysRef.textContent = days;
+  countdownTimer.refs.hoursRef.textContent = hours;
+  countdownTimer.refs.minsRef.textContent = mins;
+  countdownTimer.refs.secsRef.textContent = secs;
 }
-
-countdownTimer.initial();
